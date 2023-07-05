@@ -1,0 +1,16 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t leansolutionsllc/fib-complex-client-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true leansolutionsllc/fib-complex-client-test npm test
+
+after_success:
+  - docker build -t leansolutionsllc/fib-complex-client ./client
+  - docker build -t leansolutionsllc/fib-complex-nginx ./nginx
+  - docker build -t leansolutionsllc/fib-complex-server ./server
+  - docker build -t leansolutionsllc/fib-complex-worker ./worker
