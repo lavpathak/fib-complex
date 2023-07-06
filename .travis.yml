@@ -14,3 +14,8 @@ after_success:
   - docker build -t leansolutionsllc/fib-complex-nginx ./nginx
   - docker build -t leansolutionsllc/fib-complex-server ./server
   - docker build -t leansolutionsllc/fib-complex-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push leansolutionsllc/fib-complex-client
+  - docker push leansolutionsllc/fib-complex-nginx
+  - docker push leansolutionsllc/fib-complex-server
+  - docker push leansolutionsllc/fib-complex-worker
